@@ -14,7 +14,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <section className="bg-gradient-to-b from-emerald-50 to-gray-50 py-12 md:py-20">
+      <section className="bg-gradient-to-b from-emerald-100 to-gray-100 py-12 md:py-20">
         <div className="max-w-6xl mx-auto px-4 text-center">
           <span className="inline-block bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full text-xs font-medium mb-4">
             Safe Start • Health & Safety Training
@@ -27,7 +27,7 @@ export default function Home() {
           </h1>
           
           <p className="text-base md:text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
-            Accredited online courses for individuals and organisations. Learn at your own pace, pass the quiz, and get certified.
+            Online courses for individuals and organisations. Learn at your own pace, pass the quiz, and get certified.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
@@ -68,7 +68,7 @@ export default function Home() {
             </p>
             
             <p>
-              For organisations, Safe Start provides an all-in-one solution to assign courses, track staff progress, issue certificates, and manage refresher training. For individuals, it&apos;s a fast, flexible way to learn at your own pace, pass short quizzes, and download accredited certificates recognised across industries.
+              For organisations, Safe Start provides an all-in-one solution to assign courses, track staff progress, issue certificates, and manage refresher training. For individuals, it&apos;s a fast, flexible way to learn at your own pace, pass short quizzes, and download certificates recognised across industries.
             </p>
             
             <p className="font-medium text-emerald-700">
@@ -141,7 +141,7 @@ export default function Home() {
               </li>
               <li className="flex items-start gap-2 text-sm text-gray-700">
                 <span className="text-emerald-600 mt-0.5">✓</span>
-                <span>Industry-recognised accreditation</span>
+                <span>Wide Industry Recognition</span>
               </li>
             </ul>
             
