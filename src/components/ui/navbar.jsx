@@ -11,11 +11,11 @@ import {
 } from "@clerk/nextjs";
 
 /**
- * Navbar component - Mobile-first navigation bar
+ * Navbar component - Organization-focused navigation
  * Features:
  * - "Safe Start" branding at the left
- * - Navigation links (About, Courses, Get Started)
- * - Sign In/Out buttons at the right
+ * - Simplified navigation links (About, Courses, Pricing)
+ * - Sign In/Out buttons for organization accounts
  * - Mobile hamburger menu for small screens
  */
 export default function Navbar() {
@@ -25,6 +25,22 @@ export default function Navbar() {
   // Toggle mobile menu open/close
   const toggleMobileMenu = () => {
     setMobileMenuOpen((prev) => !prev);
+  };
+
+  // Handle smooth scroll for hash links
+  const handleHashClick = (e, targetId) => {
+    e.preventDefault();
+    const element = document.querySelector(targetId);
+    if (element) {
+      element.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+      // Close mobile menu if open
+      setMobileMenuOpen(false);
+      // Update URL without jumping
+      window.history.pushState(null, "", targetId);
+    }
   };
 
   return (
@@ -41,24 +57,27 @@ export default function Navbar() {
 
           {/* Desktop Navigation - Hidden on mobile */}
           <div className="hidden md:flex items-center gap-6">
-            <Link
+            <a
               href="#about"
-              className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors"
+              onClick={(e) => handleHashClick(e, "#about")}
+              className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors cursor-pointer"
             >
               About
-            </Link>
-            <Link
+            </a>
+            <a
               href="#courses"
-              className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors"
+              onClick={(e) => handleHashClick(e, "#courses")}
+              className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors cursor-pointer"
             >
               Courses
-            </Link>
-            <Link
-              href="/get-started"
-              className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors"
+            </a>
+            <a
+              href="#pricing"
+              onClick={(e) => handleHashClick(e, "#pricing")}
+              className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors cursor-pointer"
             >
-              Get Started
-            </Link>
+              Pricing
+            </a>
 
             {/* Desktop Sign In/Out - Right side */}
             <div className="flex items-center gap-3 ml-4 border-l pl-6">
@@ -75,6 +94,12 @@ export default function Navbar() {
                 </SignUpButton>
               </SignedOut>
               <SignedIn>
+                <Link
+                  href="/dashboard"
+                  className="text-sm font-medium text-gray-700 hover:text-emerald-700 transition-colors"
+                >
+                  Dashboard
+                </Link>
                 <UserButton afterSignOutUrl="/" />
               </SignedIn>
             </div>
@@ -131,27 +156,38 @@ export default function Navbar() {
         {mobileMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200">
             <div className="flex flex-col gap-4">
-              <Link
+              <a
                 href="#about"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-gray-700 hover:text-emerald-700 transition-colors py-2"
+                onClick={(e) => handleHashClick(e, "#about")}
+                className="text-base font-medium text-gray-700 hover:text-emerald-700 transition-colors py-2 cursor-pointer"
               >
                 About
-              </Link>
-              <Link
+              </a>
+              <a
                 href="#courses"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-gray-700 hover:text-emerald-700 transition-colors py-2"
+                onClick={(e) => handleHashClick(e, "#courses")}
+                className="text-base font-medium text-gray-700 hover:text-emerald-700 transition-colors py-2 cursor-pointer"
               >
                 Courses
-              </Link>
-              <Link
-                href="/get-started"
-                onClick={() => setMobileMenuOpen(false)}
-                className="text-base font-medium text-gray-700 hover:text-emerald-700 transition-colors py-2"
+              </a>
+              <a
+                href="#pricing"
+                onClick={(e) => handleHashClick(e, "#pricing")}
+                className="text-base font-medium text-gray-700 hover:text-emerald-700 transition-colors py-2 cursor-pointer"
               >
-                Get Started
-              </Link>
+                Pricing
+              </a>
+              
+              {/* Mobile Dashboard Link (Signed In) */}
+              <SignedIn>
+                <Link
+                  href="/dashboard"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="text-base font-medium text-gray-700 hover:text-emerald-700 transition-colors py-2"
+                >
+                  Dashboard
+                </Link>
+              </SignedIn>
               
               {/* Mobile Sign Up Button */}
               <SignedOut>
@@ -168,5 +204,4 @@ export default function Navbar() {
     </nav>
   );
 }
-
 
